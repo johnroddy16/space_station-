@@ -24,9 +24,8 @@ parameters = {
 response = requests.get('https://api.sunrise-sunset.org/json', params=parameters)
 response.raise_for_status()
 data = response.json()
-sunrise = int(data['results']['sunrise'].split('T')[1].split(':')[0])
-sunset = int(data['results']['sunset'].split('T')[1].split(':')[0])
-print(sunrise, sunset)
+sunrise = int(data['results']['sunrise'].split('T')[1].split(':')[0]) - 8 # time comes back in UTC
+sunset = int(data['results']['sunset'].split('T')[1].split(':')[0]) + 16 
 
 time_now = dt.now().hour  
 
