@@ -9,7 +9,7 @@ MY_LAT = 47.606209 # seattle latitude
 MY_LONG = -122.332069 # seattle longitude  
 
 email = 'nohtyp742@gmail.com'
-password = 'xddewbafczduzurt'    
+password = 'not a real password'    
 
 # dark: 
 def dark():
@@ -29,6 +29,7 @@ def dark():
     
     if time_now >= sunset or time_now  <= sunrise:
         return True  
+    return False 
 
 # close:
 def close():
@@ -40,14 +41,19 @@ def close():
     iss_longitude = float(data['iss_position']['longitude'])
     
     if MY_LAT - 5 <= iss_latitude <= MY_LAT + 5 and MY_LONG - 5 <= iss_longitude <= MY_LONG + 5:
-        return True  
+        return True 
+    return False  
 
+x = 0 
 # make the program run every 60 seconds:
 while True:
-    sleep(60) 
+    sleep(10) 
     
     darkk = dark()
     closee = close()
+    print(darkk, closee, x)
+    
+    x += 1
     
     if darkk and closee:
         with smtplib.SMTP('smtp.gmail.com', port=587) as connection:
